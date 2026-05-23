@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Digitronix - Premium Digital Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0b1326;
+            --secondary-dark: #131b2e;
+            --tertiary-dark: #171f33;
+            --darker-bg: #060e20;
+            --primary-blue: #0047ab;
+            --cyan-accent: #00d2fd;
+            --light-blue: #b1c5ff;
+            --light-text: #dae2fd;
+            --gray-text: #c3c6d5;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-dark: rgba(255, 255, 255, 0.05);
+            --gradient-primary: linear-gradient(127.31deg, #b1c5ff 0%, #00d2fd 100%);
+            --gradient-button: linear-gradient(135deg, #0047ab 0%, #00d2fd 100%);
+            --gradient-secondary: linear-gradient(149.3deg, #b1c5ff 0%, #00d2fd 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        /* ======================== NAVIGATION ======================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11, 19, 38, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.7rem 2rem;
+            background: rgba(11, 19, 38, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--cyan-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-blue);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ======================== HERO SECTION ======================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 210, 253, 0.15), transparent 40%),
+                        radial-gradient(circle at 10% 80%, rgba(177, 197, 255, 0.1), transparent 40%),
+                        linear-gradient(135deg, #0b1326 0%, #131b2e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-shapes {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: pulse 10s infinite alternate;
+        }
+
+        .shape-1 { width: 400px; height: 400px; background: var(--primary-blue); top: -100px; right: -100px; }
+        .shape-2 { width: 300px; height: 300px; background: var(--cyan-accent); bottom: -50px; left: -50px; animation-delay: -5s; }
+
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.2; }
+            100% { transform: scale(1.2) translate(30px, 30px); opacity: 0.4; }
+        }
+
+        .hero-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.8rem, 6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-text h1 .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--gray-text);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.2rem;
+            border-radius: 0.8rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-button);
+            color: white;
+            box-shadow: 0 10px 25px rgba(0, 71, 171, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 210, 253, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--light-blue);
+            color: var(--light-blue);
+            transform: translateY(-5px);
+        }
+
+        .hero-image-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-image {
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.8) 0%, rgba(45, 52, 73, 0.8) 100%);
+            border-radius: 2rem;
+            padding: 3rem;
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            transform: rotateY(-10deg) rotateX(5deg);
+            transition: all 0.5s ease;
+            text-align: center;
+        }
+
+        .hero-image:hover { transform: rotateY(0deg) rotateX(0deg) scale(1.02); }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(0, 210, 253, 0.5));
+            animation: float-icon 4s ease-in-out infinite;
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ======================== SERVICES ======================== */
+        .services {
+            padding: 8rem 2rem;
+            background: var(--secondary-dark);
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: rgba(0, 210, 253, 0.1);
+            color: var(--cyan-accent);
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 210, 253, 0.2);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-header h2 { font-size: clamp(2.2rem, 5vw, 3rem); margin-bottom: 1.2rem; font-weight: 800; }
+
+        .services-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 1.5rem;
+            padding: 3rem 2.5rem;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            background: var(--glass-hover);
+            transform: translateY(-10px);
+            border-color: rgba(0, 210, 253, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .service-card h3 { font-size: 1.6rem; margin-bottom: 1rem; font-weight: 700; color: white; }
+        .service-card p { color: var(--gray-text); line-height: 1.7; margin-bottom: 2rem; flex-grow: 1; }
+
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .service-price { font-size: 1.2rem; font-weight: 800; color: var(--cyan-accent); }
+
+        .service-link {
+            color: var(--light-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover { color: var(--cyan-accent); transform: translateX(5px); }
+
+        /* ======================== FORM ======================== */
+        .form-section { padding: 8rem 2rem; background: var(--primary-dark); }
+        .form-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 2.5rem;
+            padding: 4rem;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--gray-text); margin-bottom: 0.8rem; text-transform: uppercase; }
+        .form-input {
+            width: 100%;
+            background: rgba(34, 42, 61, 0.4);
+            border: 1px solid var(--border-light);
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus { outline: none; border-color: var(--cyan-accent); background: rgba(34, 42, 61, 0.7); box-shadow: 0 0 0 4px rgba(0, 210, 253, 0.1); }
+        textarea.form-input { min-height: 150px; }
+
+        .submit-btn {
+            width: 100%; padding: 1.2rem; background: var(--gradient-button); border: none; border-radius: 1rem; color: white; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.4s ease;
+        }
+
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0, 210, 253, 0.3); }
+
+        /* ======================== FOOTER ======================== */
+        .footer { background: #040a16; padding: 6rem 2rem 3rem; border-top: 1px solid var(--border-light); }
+        .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 4rem; margin-bottom: 4rem; }
+        .footer-logo { font-size: 1.8rem; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem; }
+        .footer-desc { color: var(--gray-text); line-height: 1.8; }
+        .footer-title { color: white; font-weight: 700; margin-bottom: 1.5rem; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 1rem; }
+        .footer-links a { color: var(--gray-text); text-decoration: none; transition: all 0.3s ease; }
+        .footer-links a:hover { color: var(--cyan-accent); padding-left: 5px; }
+
+        .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid var(--border-dark); display: flex; justify-content: space-between; align-items: center; color: var(--gray-text); }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--gradient-button); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; z-index: 999; opacity: 0; visibility: hidden; transition: all 0.4s ease;
+        }
+
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-image { transform: none !important; }
+            .form-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-bottom { flex-direction: column; gap: 2rem; }
+        }
+    </style>
+</head>
+<body id="home">
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Alpha Digitronix</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#form" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">Launch Project</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">Next-Gen Digital Studio</div>
+                <h1>Build Your <span class="gradient-text">Premium</span> Website with Alpha Digitronix</h1>
+                <p>We transform bold ideas into high-performance digital realities. From sleek portfolios to complex enterprise apps, we deliver precision-engineered solutions.</p>
+                <div class="hero-buttons">
+                    <a href="#form" class="btn btn-primary">Get Started 🚀</a>
+                    <a href="#services" class="btn btn-secondary">View Work ⚡</a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <div class="hero-image">
+                    <div class="hero-icon">💻</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: white;">Creative Engineering</h3>
+                    <p style="color: var(--gray-text);">Obsessed with UI/UX & Performance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <div class="badge">Our Expertise</div>
+            <h2>Premium <span class="gradient-text">Services</span></h2>
+            <p>We provide full-cycle development services designed to help your business thrive.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Startup MVP</h3>
+                <p>Rapid development of feature-rich prototypes for seed-stage startups looking for scale and speed.</p>
+                <div class="service-footer">
+                    <span class="service-price">$499+</span>
+                    <a href="#form" class="service-link">Inquire →</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <h3>E-Commerce</h3>
+                <p>Full-stack retail solutions with secure payment integration and conversion-focused design.</p>
+                <div class="service-footer">
+                    <span class="service-price">$799+</span>
+                    <a href="#form" class="service-link">Inquire →</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Custom Apps</h3>
+                <p>Bespoke software architecture designed to automate complex business workflows and unique challenges.</p>
+                <div class="service-footer">
+                    <span class="service-price">$999+</span>
+                    <a href="#form" class="service-link">Inquire →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section class="form-section" id="form">
+        <div class="form-wrapper">
+            <div class="section-header">
+                <div class="badge">Get Started</div>
+                <h2>Let's Build <span class="gradient-text">Together</span></h2>
+                <p>Fill out the form below and we'll get back to you with a custom proposal within 24 hours.</p>
+            </div>
+            <form id="leadForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" class="form-input" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">WhatsApp Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required placeholder="+91 93455 54311">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Project Type</label>
+                        <select id="type" name="type" class="form-input">
+                            <option value="MVP">Startup MVP</option>
+                            <option value="E-Commerce">E-Commerce</option>
+                            <option value="Business">Business Website</option>
+                            <option value="Portfolio">Portfolio</option>
+                            <option value="App">Custom Application</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" class="form-input" placeholder="Tell us about your vision..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Send Project Proposal 🚀</button>
+                <div id="formStatus" style="margin-top: 1.5rem; text-align: center; display: none;"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about" style="padding: 8rem 2rem; background: var(--secondary-dark);">
+        <div class="hero-content">
+            <div class="about-text">
+                <div class="badge">About Us</div>
+                <h2>Engineering <span class="gradient-text">Excellence</span></h2>
+                <p>Alpha Digitronix is a specialized technology lab where design meets engineering. We don't just build websites; we create digital experiences that resonate.</p>
+                <p>Our team focuses on the intersection of <strong>Creative UI</strong> and <strong>Scalable Backend</strong> to ensure your project looks stunning and performs flawlessly.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div style="background: var(--glass-bg); padding: 2rem; border-radius: 1.5rem; text-align: center; border: 1px solid var(--border-light);">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--cyan-accent);">150+</div>
+                    <div style="color: var(--gray-text); text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">Projects</div>
+                </div>
+                <div style="background: var(--glass-bg); padding: 2rem; border-radius: 1.5rem; text-align: center; border: 1px solid var(--border-light);">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--cyan-accent);">98%</div>
+                    <div style="color: var(--gray-text); text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">Retention</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="services" id="contact" style="background: var(--primary-dark);">
+        <div class="section-header">
+            <div class="badge">Contact</div>
+            <h2>Get in <span class="gradient-text">Touch</span></h2>
+            <p>Ready to start? Reach out through your preferred channel.</p>
+        </div>
+        <div class="services-grid">
+            <a href="mailto:karthick.alphadigitronix@gmail.com" class="service-card" style="text-align: center; text-decoration: none;">
+                <div class="service-icon">📧</div>
+                <h3>Email</h3>
+                <p>karthick.alphadigitronix@gmail.com</p>
+                <span class="service-link">Send Email →</span>
+            </a>
+            <a href="https://wa.me/919345554311" class="service-card" style="text-align: center; text-decoration: none;">
+                <div class="service-icon">💬</div>
+                <h3>WhatsApp</h3>
+                <p>+91 93455 54311</p>
+                <span class="service-link">Chat Now →</span>
+            </a>
+            <a href="tel:+919345334089" class="service-card" style="text-align: center; text-decoration: none;">
+                <div class="service-icon">📞</div>
+                <h3>Call</h3>
+                <p>+91 93453 34089</p>
+                <span class="service-link">Call Now →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">Alpha Digitronix</div>
+                <p class="footer-desc">Precision-engineered digital solutions for the visionary era. Crafting modern web experiences since 2024.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">MVP Development</a></li>
+                    <li><a href="#services">E-Commerce</a></li>
+                    <li><a href="#services">Custom Apps</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="https://wa.me/919345554311">WhatsApp</a></li>
+                    <li><a href="mailto:karthick.alphadigitronix@gmail.com">Email Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Alpha Digitronix Solutions. All rights reserved.</p>
+            <p>Built with ❤️ for Visionaries</p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <a href="#home" class="back-to-top">↑</a>
+
+    <script>
+        window.addEventListener('load', () => { document.body.style.opacity = '1'; });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const btt = document.querySelector('.back-to-top');
+            if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+            if (window.scrollY > 500) btt.classList.add('visible'); else btt.classList.remove('visible');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxNTv1Gk4gd3BrwuS5PENp27ll5hx3fUE5DUW9fuUYnaj12-nS4OkK_QTgS7DkPxkPN/exec';
+
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const btn = form.querySelector('.submit-btn');
+            const status = document.getElementById('formStatus');
+            
+            btn.disabled = true;
+            btn.textContent = '⏳ Sending...';
+            status.style.display = 'none';
+
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData);
+            params.append('timestamp', new Date().toLocaleString());
+
+            fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params })
+            .then(() => {
+                status.style.display = 'block';
+                status.innerHTML = '<span style="color: #10b981; font-weight: 700;">✅ Success! We\'ll contact you soon.</span>';
+                form.reset();
+            })
+            .catch(() => {
+                status.style.display = 'block';
+                status.innerHTML = '<span style="color: #ef4444; font-weight: 700;">⚠️ Error! Please try again.</span>';
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = 'Send Project Proposal 🚀';
+            });
+        });
+    </script>
+</body>
+</html>
